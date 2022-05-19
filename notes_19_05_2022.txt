@@ -723,7 +723,7 @@ public class Demo2 {
 // The Exception object is being created during the execution of the code and is handled by the exception handler which is
 // called the default handler is being provided by the JVM.
 
-// SO WE SHOULD NOT RELY ON THE DEFAULT HANDLER TO HANDLE THE EXCEPTION BUT BEING A CODE WE SHOULD
+// SO WE SHOULD NOT RELY ON THE DEFAULT HANDLER TO HANDLE THE EXCEPTION BUT BEING A CODER WE SHOULD
 // WRITE THE CODE FOR HANDLING THE EXCEPTION IN OUR CODE. THAT MAKES THE EXCEPTION HANDLING IN A 
 // GRACEFUL WAY RATHER THAN IN A RANDOM WAY.
 
@@ -773,7 +773,7 @@ public class Demo4 {
 // Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 10
 	at exception.Demo4.main(Demo4.java:9)
 --------------------------------------------------------------------------------------------------------
-The runtime errors shown previously are called as exceptions and the process of handling the exceptions is known as Exception Handling. So till now in the above code we have not handled the exception explicitly within the
+The runtime errors shown previously are called as exceptions and the process of handling the exceptions is known as Exception Handling. So till now in the above codes we have not handled the exception explicitly within the
 code so in that case default handler which is part of JVM is working and it is handling the exception.
 -------------------------------------------------------------------------------------------------------
 // To handle the exception we write the try catch block.
@@ -789,7 +789,7 @@ catch (exceptionType e) ‏
 try block. try block is followed by catch block . In the catch block we handle the exception.
 package exception;
 public class Demo5 {
-{
+
 public static void main(String[] args) {
 		
 		int num1=10;
@@ -797,7 +797,7 @@ public static void main(String[] args) {
                 try
                   {
 		      System.out.println("Before exception");
-		      int result=num1/num2;  // ArithmeticException ar=new ArithmeticException();
+		      int result=num1/num2;  // ArithmeticException exception=new ArithmeticException();
                   }catch(ArithmeticException exception){
                      System.out.println(exception.getMessage());
                      //exception.printStackTrace();
