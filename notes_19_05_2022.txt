@@ -1,0 +1,871 @@
+Interface are providing a set of protocols/rules which the classes need to adhere.
+
+public interface Calculator1 {
+   int add();
+   int subtract();
+   // public abstract int subtract();
+   // public abstract int add();
+}
+
+// Suppose in the above case we have Calculator1 as interface and it has given us
+// 2 protocols in the form of method declaration. Those methods are add and subtract..
+// The class which will implement the interface Calculator1 need to follow the 
+// protocols by overriding the method/methods just like overriding the abstract methods of abstract class.
+// Interface methods are public and abstract.
+// If we are not overriding the methods of the interface in the class which is implementing the interface,
+// the class needs to be declared as an abstract.
+// We need to override all the abstract methods of the interface in the class which is implementing the interface.  
+public class Number1 implements Calculator1 {
+  private int num1;
+  private int num2;
+
+ // setters/getters
+
+  public int add(){
+     return num1+num2;
+ }
+
+ public int subtract(){
+  return num1-num2;
+ }
+
+ public int getNum1() {
+	return num1;
+}
+
+public void setNum1(int num1) {
+	this.num1 = num1;
+}
+
+public int getNum2() {
+	return num2;
+}
+
+public void setNum2(int num2) {
+	this.num2 = num2;
+}
+
+
+}
+
+public class InterfaceDemo1{
+   public static void main(String args[]){
+     //Calculator1 calculator=new Calculator1();
+    // We cannot create an object of interface type. We can create a reference variable of interface
+    Calculator1 calculator=null;
+    Number1 number=new Number1();
+    number.setNum1(10);
+    number.setNum2(2);
+    calculator=number;  // The interface reference can store the address of the object of
+   // the class which has implemented the interface      
+   System.out.println(calculator.add());
+   System.out.println(calculator.subtract());
+   //calculator.setNum1(10);
+   //calculator.setNum2(20);
+   Number1 number2=(Number1)calculator;
+   number2.setNum1(10);
+   number2.setNum2(20);
+   // We cannot write step13 and step14 because reference is of Calculator type 
+   // and Calculator interface is not having the method setNum1 and setNum2
+   
+   }
+  }
+     
+---------------------------------------------------------------------------------------------------------------  
+
+From Java version 8, interfaces can have two other types of methods also:
+* default
+* static
+apart from the abstract methods. default and static methods can have method body.
+--------------------------------------------------------------------------------------------------------------
+public interface Calculator2 {
+   int num=20;
+  // public static final NUM=20;
+}   
+
+public class Number2 implements Calculator2 {
+  
+   public void display(){
+    System.out.println(num);
+   }
+}
+   
+ 
+
+// In interfaces we can declare variable also but they are of 
+ public static and final 
+
+
+------------------------------------------------
+
+public interface Calculator2 {
+   int divide();
+   int multiply();
+ 
+}
+
+public interface Calculator extends Calculator1,Calculator2{
+    void result();
+}
+// One interface will extend another interface. It wont implement.
+
+public class Number3 implements Calculator {
+private int num1;
+private int num2;
+
+	public int getNum1() {
+	return num1;
+}
+
+public void setNum1(int num1) {
+	this.num1 = num1;
+}
+
+public int getNum2() {
+	return num2;
+}
+
+public void setNum2(int num2) {
+	this.num2 = num2;
+}
+
+	@Override
+	public int add() {
+		// TODO Auto-generated method stub
+		return num1+num2;
+	}
+
+	@Override
+	public int subtract() {
+		// TODO Auto-generated method stub
+		return num1-num2;
+	}
+
+	@Override
+	public int divide() {
+		// TODO Auto-generated method stub
+		return num1/num2;
+	}
+
+	@Override
+	public int multiply() {
+		// TODO Auto-generated method stub
+		return num1*num2;
+	}
+
+	@Override
+	public void result() {
+		System.out.println(add());
+		System.out.println(subtract());
+		System.out.println(divide());
+		System.out.println(multiply());
+		
+	}
+
+}
+
+ public class InterfaceDemo3{
+    public static void main(String args[]){
+         Calculator calc=null;
+         Number3 number=new Number3();
+         number.setNum1(10);
+         number.setNum2(2);
+         calc=number;
+         calc.result();
+    }
+  }
+
+// In the above code , we have seen an interface can extend multiple interfaces. But we know a class can extend only one class.
+---------------------------------------------------------------------------------------------------------------------------
+
+public interface Interface1{}
+public interface Interface2{}
+
+public class Base{}
+
+public class Derived extends Base implements Interface1,Interface2{
+
+
+}
+
+/* A class can extend only one class but can implement multiple interfaces */
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+Basically through the help of interfaces in Java we achieve multiple inheritance.
+
+
+
+Let us take an example from daily life. Suppose we have Doctor,Teacher and Manager. Doctor, Teacher and Manager are good
+Instrument player. So we need to represent the doctor as Musician also and same with Teacher and Manager.
+
+  public interface Musician{
+           void instrumentPlay();
+  }
+
+  public interface Player{
+    void playAGame();
+  }
+
+  public class Doctor implements Musician,Player{
+  
+   public void toMedicate(){
+    System.out.prinltn("To treat patients");
+   }
+   
+  public void instrumentPlay(){
+   System.out.println("Play Sitar");
+   }
+
+    public void playAGame(){
+    System.out.println("Play Football");
+ 
+  }
+
+  public class Teacher implements Musician{
+    
+   
+   public void toTeach(){
+   System.out.println("Teaches students");
+   }
+  
+     public void instrumentPlay(){
+   System.out.println("Play Violin");
+   }
+ 
+ }
+
+  public class Manager implements Musician{
+   public void toManage(){
+   System.out.println("Manager work");
+  }
+   
+   public void instrumentPlay(){
+   System.out.println("Play Guitar");
+   }
+}  
+ 
+  Doctor doctor=new Doctor();
+  doctor.toMedicate();
+  Teacher teacher=new Teacher();
+  treacher.toTeach();
+  Manager manager=new Manager();
+  manager.toManage();
+
+// I need to represent doctor as a musician or a teacher as a musician
+
+ Musician musician1=doctor;
+ musician1.instrumentPlay();
+ musician1.toMedicate(); // the line will show compilation error because Musician interface is not having the method defined
+ Musician musician2=teacher;
+ musician1.instrumentPlay();
+ 
+
+These people are good players also
+Player player1=doctor;
+player1.playAGame();
+
+// Doctor can behave as a Doctor
+// Doctor can behave as a Musician
+// Doctor can behave as a Player too
+// So we can see the multiple Inheritance being achieved.
+--------------------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+public class UserInput {
+    public static void main(String args[]){
+     Scanner scan=new Scanner(System.in);
+    }
+ }
+
+/* In the above example , user defined class UserInput is in default package ( class without a package declaration ) whereas
+Scanner class is in java.util package. As they are in different packages we have to write the import statement.
+
+ Demo.java
+ public class Demo {  }
+
+
+ Main.java
+ public class Main{
+  public static void main(String args[]){
+   Demo demo=new Demo();
+  }
+}
+
+// In the above code both Demo class and Main class are in the same default package and that is the reason for using Demo class
+// in the Main class we dont need any import statement.
+
+Let us create a package called mypack1. Within the package we created a class called Hello.
+
+package mypack1;
+
+public class Hello {
+public void display() {
+	System.out.println("Hello");
+}
+}
+
+Let is create one more class called Main1 but it will be in the default package.
+
+import mypack1.Hello;
+
+public class Main1 {
+
+	public static void main(String[] args) {
+	   Hello hello=new Hello();
+	    hello.display();
+	   
+	}
+}
+
+// In the above code we can observe that as Hello class is not in the same package of Main1, we have to write the import statement.
+
+---------------------------------------------------------------------------------------------------------------------------
+Let us create another package called mypack2 and Create a class Main within the package mypack2.
+package mypack2;
+
+import mypack1.Hello;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Hello hello=new Hello();
+		hello.display();
+	}
+
+}
+/* In the example above both Main and Hello are in packages defined by the code. Main is in mypack2 and Hello is in mypack1. */
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+package demo.mypack;
+
+public class Hello {
+   public static void main(String args[]){
+
+  }
+}
+-------------------------------------------------------------------------------------------------------------------------
+
+ package mypackage1;
+
+public class A {
+  private int a;
+  int b;
+  protected int c;
+  public int d;
+  
+  public void display()
+  {
+	  System.out.println(a);
+	  System.out.println(b);
+	  System.out.println(c);
+	  System.out.println(d);
+
+	  
+  }
+}
+/* in the above code class A is within the package mypackage1. The class is having members of all the access specifier.
+  we can see that private,default,protected and public are accessible in the same class. */
+
+package mypackage1;
+
+public class B {
+
+	  public void disp() {
+		  A a=new A();
+		 System.out.println(a.a); // The field A.a is not visible
+		 System.out.println(a.b);
+		 System.out.println(a.c);
+		 System.out.println(a.d);
+	  }
+}
+
+/* We have class B in the same package as that of class A. The class B is not a sub class of class A. So we can see that
+ only the private member of class A is not accessible from class B */
+
+package mypackage1;
+
+public class C extends A {
+  public void display() {
+	  System.out.println(a);
+	  System.out.println(b);
+	  System.out.println(c);
+	  System.out.println(d);
+  }
+}
+/*  We created a child class C of class A. Both A and C are in the same package. The class C is able to access all the
+ members of the class A excluding the private member */
+
+
+package mypackage2;
+
+import mypackage1.A;
+
+public class D {
+	 public void disp() {
+		  A a=new A();
+		 System.out.println(a.a); 
+		 System.out.println(a.b);
+		 System.out.println(a.c);
+		 System.out.println(a.d);
+	  }
+}
+/* The above class D is in different package as that of A. D is a non derived class. The class D can access only the public member
+of class A */
+
+package mypackage2;
+
+import mypackage1.A;
+
+public class E extends A {
+	public void display() {
+		  System.out.println(a);
+		  System.out.println(b);
+		  System.out.println(c);
+		  System.out.println(d);
+	  }
+}
+
+/* Class E is a subclass of class A. class E is in different package as that of A. only the protected member and public member are
+accessible */
+
+
+[ protected members are accessed by the subclasses in the same package or different package and also by the non sub class in the
+same package example class B]
+[ default member is accessible in the same package. The class can be a subclass or a non subclass. default member is restricted
+within a package that means if the classes are in the same package , default member can be accessed ]
+[ private is accessible in the same class ]
+[ public can be accessed from anywhere ]
+
+Anything declared as public can be accessed from anywhere
+
+Anything declared as private can be accessed only within that class
+
+If access modifier is not mentioned, an element is accessible to all the classes in the same package
+
+Anything declared as protected can be accessible to all the classes inside the same package and to the sub classes present in a different package
+---------------------------------------------------------------------------------------------------------------------------------
+ // The below code is incorrect as we are keeping the first line as import but the first line should be with the package declaration.
+import mypackage1.A;
+package mypackage2;
+
+public class E extends A {
+	public void display() {
+		  System.out.println(a);
+		  System.out.println(b);
+		  System.out.println(c);
+		  System.out.println(d);
+	  }
+}
+-------------------------------------------------------------------------------------------
+Q What are the different types of errors:-
+1) Syntax error / compilation error
+2) Logical errors
+3) Runtime error / Exception
+---------------------------------------------------------------------------------------------------------------------------
+package exception;
+
+public class Demo1 {
+
+	public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+		System.out.println("Before exception");
+		int result=num1/num2;
+		System.out.println("After exception");
+		
+
+	}
+
+}
+// Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at exception.Demo1.main(Demo1.java:10)
+
+// In the code above the line where we wrote result=num1/num2, exception object got created. exception object is of 
+// ArithmeticException. The exception takes place during the runtime or we can say during the execution of the code. 
+// The lines/statements which we have after the line where exception takes place are not executed.
+// The code execution stops abruptly.
+----------------------------------------------------------------------------------------------------------------------------------
+
+package exception;
+
+public class Demo2 {
+
+	public static void main(String[] args) {
+		int num[]=new int[10];
+		System.out.println(num[11]);
+
+	}
+
+}
+
+//Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 11 out of bounds for length 10
+	at exception.Demo2.main(Demo2.java:7)
+// When the exception takes place in line 7, an object of ArrayIndexOutOfBoundsException is created.
+// When we write our own code and class. We create objects by writing
+   Employee emp=new Employee();
+// The Exception object is being created during the execution of the code and is handled by the exception handler which is
+// called the default handler is being provided by the JVM.
+
+// SO WE SHOULD NOT RELY ON THE DEFAULT HANDLER TO HANDLE THE EXCEPTION BUT BEING A CODE WE SHOULD
+// WRITE THE CODE FOR HANDLING THE EXCEPTION IN OUR CODE. THAT MAKES THE EXCEPTION HANDLING IN A 
+// GRACEFUL WAY RATHER THAN IN A RANDOM WAY.
+
+--------------------------------------------------------------------------------------------------
+package exception;
+
+class Book {
+	
+	public void display()
+	{
+		System.out.println("Hello");
+	}
+	
+}
+public class Demo3 {
+
+	public static void main(String[] args) {
+		Book book=null;
+		book.display();
+		
+	}
+
+}
+// Exception in thread "main" java.lang.NullPointerException: Cannot invoke "exception.Book.display()" because "book" is null
+	at exception.Demo3.main(Demo3.java:15)
+
+
+// In the above code the book reference variable is not storing the address of an object. 
+// we are calling the display method on the reference which is not pointing to any object and that
+// is the reason we get NullPointerException.
+
+--------------------------------------------------------------------------------------------------------
+package exception;
+
+public class Demo4 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+	for(int i=0;i<=num.length;i++)
+	{
+		System.out.println(num[i]);
+	}
+
+	}
+
+}
+// Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 10 out of bounds for length 10
+	at exception.Demo4.main(Demo4.java:9)
+--------------------------------------------------------------------------------------------------------
+The runtime errors shown previously are called as exceptions and the process of handling the exceptions is known as Exception Handling. So till now in the above code we have not handled the exception explicitly within the
+code so in that case default handler which is part of JVM is working and it is handling the exception.
+-------------------------------------------------------------------------------------------------------
+// To handle the exception we write the try catch block.
+try
+{
+     // statements that may cause an exception
+}
+catch (exceptionType e) ‏
+{
+     // error handling code
+}
+/* The statements where we think exception can take place, those lines we keep it within the 
+try block. try block is followed by catch block . In the catch block we handle the exception.
+package exception;
+public class Demo5 {
+{
+public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+                try
+                  {
+		      System.out.println("Before exception");
+		      int result=num1/num2;  // ArithmeticException ar=new ArithmeticException();
+                  }catch(ArithmeticException exception){
+                     System.out.println(exception.getMessage());
+                     //exception.printStackTrace();
+                   }
+		System.out.println("After exception");
+   }
+}
+
+Before exception
+/ by zero
+After exception
+// printStackTrace() ---> Will show in details including the exception class name and the line number where the exception was
+generated. printStackTrace() can be used when we are developing the code because it will show the line number where the
+actual runtime error took place. As it is giving us many information, it consumes more memory in comparison to when we 
+see the error message with getMessage. So when the code is given to the customer we should remove the printStackTrace().
+---------------------------------------------------------------------------
+
+public class Demo6 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{
+	for(int i=0;i<=num.length;i++)
+	{
+		System.out.println(num[i]);
+	}
+        }catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println(ex.getMessage());
+        }
+
+	}
+
+}
+
+-------------------------------------------------------------------------------
+
+public class Demo7 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{
+	for(int i=0;i<=num.length;i++)
+	{
+		System.out.println(num[i]);
+	}
+        }catch(ArithmeticException ex){
+            System.out.println(ex.getMessage());
+        }
+
+	}
+
+}
+
+// In this case exception is of type ArrayIndexOutOfBoundsException but in the catch we wrote ArithmeticException. So the 
+// catch is not capable of handling the ArrayIndexOutOfBoundsException. In that case exception will be handled by the 
+// default handler which is part of JVM.
+-----------------------------------------------------------------------
+multiple catch blocks
+
+public class Demo7 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{
+	       for(int i=0;i<=num.length;i++)
+	          {
+		      System.out.println(num[i]);
+	          }
+           }// try close
+             catch(ArithmeticException ex){
+                 System.out.println(ex.getMessage());
+           } // catch close
+             catch(ArrayIndexOutOfBounds ex){
+                 System.out.println(ex.getMessage());
+           } // catch close
+
+	} // method close
+
+}  // class close
+
+-----------------------------------------------------------------------------------------------------------------------
+package exception;
+public class Demo8 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{
+	       for(int i=0;i<=num.length;i++)
+	          {
+		      System.out.println(num[i]);
+	          }
+           } catch(ArithmeticException ex){
+                 System.out.println(ex.getMessage());
+           } catch(ArrayIndexOutOfBoundsException ex){
+                 System.out.println(ex.getMessage());
+           } catch(Exception ex){
+                 System.out.println(ex.getMessage());
+           }
+
+	} // method close
+
+}  // class close
+--------------------------------------------------------------------------------------------------------
+
+package exception;
+public class Demo9 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{
+	       for(int i=0;i<=num.length;i++)
+	          {
+		      System.out.println(num[i]);
+                  }
+	  }catch(Exception ex){
+                 System.out.println(ex.getMessage());
+           }
+
+	} // method close
+
+}  // class close
+// Exception is the base class or Parent class in the exception hierarchy so instead of the specific exception classes,
+we can mention the Generic/base/parent class which is Exception.
+-----------------------------------------------------------------------------------------------------------
+
+
+package exception;
+public class Demo10 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{
+	       for(int i=0;i<=num.length;i++)
+	          {
+		      System.out.println(num[i]);
+	          }
+           } catch(Exception ex){
+                 System.out.println(ex.getMessage());
+           }catch(ArithmeticException ex){
+                 System.out.println(ex.getMessage());
+           } catch(ArrayIndexOutOfBoundsException ex){
+                 System.out.println(ex.getMessage());
+           } 
+
+	} // method close
+
+}  // class close
+
+// Unreachable catch block for ArithmeticException. It is already handled by the catch block for Exception.
+Why unreachable exception?
+As the Exception class is the Generic class or base class, it is capable of handling all the exceptions because of which
+ArithmeticException's catch block and ArrayIndexOutOfBoundsException's catch block are never reached.
+---------------------------------------------------------------------------------------------------------------------
+// Nested try catch block
+//main try block
+try{
+    statement 1;
+    statement 2;
+    //nested try-catch block
+    try{
+        statement 3;
+    }
+    catch(Exception ex){
+        //exception message
+    }
+}
+catch(Exception ex){
+    //exception message
+}
+---------------------------------------------------------------------
+package exception;
+public class Demo11 {
+
+	public static void main(String[] args) {
+	int num[]=new int[10];
+        try{   // outer
+               try    // inner
+                  {
+	                 for(int i=0;i<=num.length;i++)
+	                    {
+		                  System.out.println(num[i]);
+	                    }
+                  }catch(ArithmeticException ex){
+                               System.out.println(ex.getMessage());
+                  }
+           }catch(Exception ex){
+                 System.out.println("Handled in the outer catch "+ex.getMessage());
+           } 
+
+	} // method close
+
+}  // class close
+------------------------------------------------------------------------------------------------------
+
+try{
+     //Statements that may cause an exception
+}
+catch (ExceptionType e) ‏{
+     //Error handling code
+}
+finally {
+	//Statements that must be executed 
+}
+
+
+
+---------------------------------------------------------------------
+package exception;
+public class Demo12 {
+
+	public static void main(String[] args) {
+                   int num1=10;
+                   int num2=0;
+                   try {
+                     int result=num1/num2;
+                       }catch(Exception ex){
+                           System.out.println(ex.getMessage());
+                       }finally{
+                         System.out.println("Thanks!!!!!");
+                        }
+         }
+  }
+-----------------
+package exception;
+public class Demo13 {
+
+	public static void main(String[] args) {
+                   int num1=10;
+                   int num2=2;
+                   try {
+                     int result=num1/num2;
+                       }catch(Exception ex){
+                           System.out.println(ex.getMessage());
+                       }finally{
+                         System.out.println("Thanks!!!!!");
+                        }
+         }
+  }
+     
+------------------
+//The below code gives compilation error because The line where it is written
+// FileInputStream fis=new FileInputStream("data.txt");
+// The constructor throws an exception called FileNotFoundException
+// FileNotFoundException is a checked exception
+// Checked Exception means we have to handle the exception in the code itself by writing
+// the try catch block otherwise the code gives compilation error.
+// The below code will give compilation error.
+
+import java.io.FileInputStream;
+
+public class CheckedException {
+
+	public static void main(String[] args) {
+
+     FileInputStream fis=new FileInputStream("data.txt");
+
+	}
+
+}
+// - Unhandled exception type 
+	 FileNotFoundException
+----------------------
+// To get rid of compilation error
+
+
+import java.io.FileInputStream;
+
+public class CheckedException1 {
+
+	public static void main(String[] args) {
+     try{
+                FileInputStream fis=new FileInputStream("data.txt");
+        }catch(FileNotFoundException ex){
+          System.out.println(ex.getMessage()); 
+         }
+	}
+
+}
+
+--------------------
+
+For unchecked exception we may not handle the exception in our code. It wont show any 
+compilation error.
+                      
