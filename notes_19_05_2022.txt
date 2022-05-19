@@ -814,6 +814,140 @@ generated. printStackTrace() can be used when we are developing the code because
 actual runtime error took place. As it is giving us many information, it consumes more memory in comparison to when we 
 see the error message with getMessage. So when the code is given to the customer we should remove the printStackTrace().
 ---------------------------------------------------------------------------
+package exception;
+public class Demo5b {
+
+public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+                try
+                  {
+		      System.out.println("Before exception");
+		      int result=num1/num2; 
+                      int num[]=new int[20];
+                      System.out.println(num[21]);
+
+                  }catch(ArithmeticException exception){
+                     System.out.println(exception.getMessage());
+                     //exception.printStackTrace();
+                   }
+		System.out.println("After exception");
+   }
+}
+----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------
+package exception;
+public class Demo5c {
+
+public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+                try
+                  {
+		      System.out.println("Before exception");
+                      int num[]=new int[20];
+                      System.out.println(num[21]);
+		      int result=num1/num2; 
+                     
+
+                  }catch(ArithmeticException exception){
+                     System.out.println(exception.getMessage());
+                     //exception.printStackTrace();
+                   }
+		System.out.println("After exception");
+   }
+}
+
+[ In the above case as ArrayIndexOutOfBoundsException is occuring first but we dont have a user defined
+handler for that . So in that case the default handler will handle the exception.
+-----------------------------------------------------------------------------------------------------------
+package exception;
+public class Demo5d {
+
+public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+                try
+                  {
+		      System.out.println("Before exception");
+                      int num[]=new int[20];
+                      System.out.println(num[21]);
+		      int result=num1/num2; 
+                     
+
+                  }catch(ArithmeticException exception){
+                     System.out.println(exception.getMessage());
+                     //exception.printStackTrace();
+                   }catch(ArrayIndexOutOfBoundsException exception){
+                    System.out.println(exception.getMessage());
+                   }
+		System.out.println("After exception");
+   }
+}
+[ In the above case we can see that we can have multiple catch blocks. So in this case the exception will be
+because of Array index and we have put a catch for ArrayIndexOutOfBoundsException]
+
+
+------------------------------------------------------------------------------------------------------
+Q If I am not sure about what kind of exception will take place. In that case what to do?
+A 
+
+-----------------------------------------------------------------------------------------------------------
+package exception;
+public class Demo5e {
+
+public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+                try
+                  {
+		      System.out.println("Before exception");
+                      int num[]=new int[20];
+                      System.out.println(num[21]);
+		      int result=num1/num2; 
+                     
+
+                  }catch(Exception exception){
+                     System.out.println(exception.getMessage());
+                     //exception.printStackTrace();
+                   }
+		System.out.println("After exception");
+   }
+}
+
+In the above case we can write Exception as it is the Parent class for all the exceptions
+generally which we see.
+----------------------------------------------------------------------------------------------
+package exception;
+public class Demo5f {
+
+public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+                try
+                  {
+		      System.out.println("Before exception");
+                      int result=num1/num2; 
+                      int num[]=new int[20];
+                      System.out.println(num[21]);
+		      
+                     
+
+                  }catch(Exception exception){
+                     System.out.println(exception.getMessage());
+                     //exception.printStackTrace();
+                   }
+		System.out.println("After exception");
+   }
+}
+
+
+-------------------------------------------------------------------------------------------------------
 
 public class Demo6 {
 
@@ -1037,7 +1171,7 @@ public class Demo13 {
          }
   }
      
-------------------
+--------------------------------------------------------------------------------------------------------------
 //The below code gives compilation error because The line where it is written
 // FileInputStream fis=new FileInputStream("data.txt");
 // The constructor throws an exception called FileNotFoundException
@@ -1046,6 +1180,7 @@ public class Demo13 {
 // the try catch block otherwise the code gives compilation error.
 // The below code will give compilation error.
 
+package exception;
 import java.io.FileInputStream;
 
 public class CheckedException {
@@ -1059,11 +1194,12 @@ public class CheckedException {
 }
 // - Unhandled exception type 
 	 FileNotFoundException
-----------------------
+-----------------------------------------------------------------------------------------------------------
 // To get rid of compilation error
 
-
+package exception;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class CheckedException1 {
 
@@ -1077,8 +1213,26 @@ public class CheckedException1 {
 
 }
 
---------------------
+----------------------------------------------------------------------------------------------------------------
 
 For unchecked exception we may not handle the exception in our code. It wont show any 
 compilation error.
                       
+
+
+package exception;
+
+import java.util.Scanner;
+public class UserGeneratedException{
+   public static void main(String args[]){
+   Scanner scan=new Scanner(System.in);
+   int marks;
+   System.out.println("Enter the marks");
+   marks=scan.nextInt();
+   if(marks<0){
+    /* Exception ex=new Exception("Negative marks is not allowed");
+     throw ex; */
+     throw new Exception("Negative marks is not allowed");
+   }
+}
+}
