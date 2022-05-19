@@ -101,25 +101,34 @@ From Java version 8, interfaces can have two other types of methods also:
 * static
 apart from the abstract methods. default and static methods can have method body.
 --------------------------------------------------------------------------------------------------------------
-public interface Calculator2 {
-   int num=20;
+public interface Calculator2a {
+   int NUM=20;
   // public static final NUM=20;
 }   
 
-public class Number2 implements Calculator2 {
+public class Number2 implements Calculator2a {
   
    public void display(){
-    System.out.println(num);
+    System.out.println(NUM);
    }
 }
-   
+ 
+
+public class CalculatorMain2a{
+  public static void main(String args[]) {
+         Number2 number=new Number2();
+         number.display();  //20
+         System.out.println(Calculator2a.NUM); //20
+ }
+}
+  
  
 
 // In interfaces we can declare variable also but they are of 
  public static and final 
 
 
-------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 
 public interface Calculator2 {
    int divide();
@@ -189,12 +198,26 @@ public void setNum2(int num2) {
 
  public class InterfaceDemo3{
     public static void main(String args[]){
-         Calculator calc=null;
+         Calculator calc=null;  // We cannot create an object of interface because interfaces are incomplete as
+     // the methods are abstract in the interface
          Number3 number=new Number3();
          number.setNum1(10);
          number.setNum2(2);
-         calc=number;
+         calc=number; // We can store the reference of an object of a class which has implemented the interface.
          calc.result();
+         System.out.println(calc.add());
+        Calculator1 calc1=number;
+        // calc1.result(); 
+          calc1.add();
+          calc1.subtract();
+        // calc1.divide(); 
+        // calc1.multiply();
+        Calculator2 calc2=number;
+        //calc2.result();
+        //calc2.add();
+        //calc2.subtract();
+        calc2.divide();
+        calc2.multiply();.  
     }
   }
 
@@ -227,9 +250,10 @@ Instrument player. So we need to represent the doctor as Musician also and same 
            void instrumentPlay();
   }
 
-  public interface Player{
-    void playAGame();
+  public inteface Player{
+     void playAGame();
   }
+
 
   public class Doctor implements Musician,Player{
   
@@ -241,10 +265,10 @@ Instrument player. So we need to represent the doctor as Musician also and same 
    System.out.println("Play Sitar");
    }
 
-    public void playAGame(){
-    System.out.println("Play Football");
- 
-  }
+  public void playAGame(){
+    System.out.println("Playing football");
+
+   }
 
   public class Teacher implements Musician{
     
@@ -288,6 +312,9 @@ Instrument player. So we need to represent the doctor as Musician also and same 
 These people are good players also
 Player player1=doctor;
 player1.playAGame();
+player1.instrumentPlay(); // We wont be able to call instrumentPlay as instrumentPlay method is not available
+// within the Player interface.
+
 
 // Doctor can behave as a Doctor
 // Doctor can behave as a Musician
