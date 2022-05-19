@@ -321,6 +321,169 @@ player1.instrumentPlay(); // We wont be able to call instrumentPlay as instrumen
 // Doctor can behave as a Player too
 // So we can see the multiple Inheritance being achieved.
 --------------------------------------------------------------------------------------------------
+Q How we can define a class within a package?
+A write the first line in the file as package followed by package name. Example
+
+package pack1;
+
+public class Hello{
+  public static void main(String args[]){
+   System.out.println("Hello Friends!!!!");
+  }
+ }
+
+[ In IDE like eclipse we can first by creating a package and then including the class within the package. ]
+
+Q How we can create a package in eclipse?
+A Right click on the project name in the Package Explorer. 
+  New ===> package and delete the default package name ( which is the same name as that of the project name )
+  and provide your own customised name.
+
+Q How we can create a file within the created package?
+A Right click on the package name in the Package Explorer. New ====> class
+
+
+Q Can we have multiple classes in the same package?
+A yes we can have. In that case all the classes should have the same package name as the first line. 
+
+
+Q Can we provide a package name after creation of a class in Eclipse?
+A Yes. Right click on the project name and start creating a new class with New====> class. 
+While providing the class name . Mention the package name also.
+
+Q Can we have subpackage and how we indentify that it is a sub-package?
+A the package name and subpackage name is separated with .
+example   infosys.com.demo  ===> here infosys is the package and com is a subpackage of infosys and demo is
+the subpackage of com.
+
+Q can we have classes in both package and subpackage?
+A Yes
+--------------------------------------------------------------------------------------------------------
+Q If we have classes in the same package and we want to access a class from
+another class, do we need to write import statement?
+A No
+
+package infosys.demo1;
+public class Hello
+{
+
+}
+
+package infosys.demo1;
+public class Main {
+  public static void main(String args[]){
+    Hello hello=new Hello();
+ }
+}
+In the above case we can see that Main class is making use of Hello class but as Main and Hello are in 
+same package we need not to write the import statement.
+
+package infosys.demo2;
+
+import infosys.demo1.Hello;
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String args[]){
+    Hello hello=new Hello();
+ }
+
+
+In the above case import is required to inform that Hello is in different package as that of Main.
+Here in the above example Hello is within infosys.demo1 and Main is in infosys.demo2.
+
+Observation:
+package should be first statement followed by import statement ( if we have import statements)
+We can have only one package statement but multiple import statements.
+---------------------------------------------------------------------------------------------
+package pack1;
+
+class Hi{
+   public void disp(){
+    System.out.println("Hello");
+   }
+}
+
+
+package pack2;
+
+import pack1.Hi;
+
+class Main{
+   public static void main(String args[]){
+   Hi hi=new Hi();
+ }
+}
+
+[In the above case Hi is having a default access and it is within a different package from Main class. 
+ That is the reason Hi is not accessible from the Main class]
+
+package pack1;
+
+public class Hi{
+   public void disp(){
+    System.out.println("Hello");
+   }
+}
+
+
+package pack2;
+
+import pack1.Hi;
+
+class Main{
+   public static void main(String args[]){
+   Hi hi=new Hi();
+ }
+}
+[In the above case as soon as we made the class Hi as public , now it is accessible from Main which is in
+different package]
+
+
+package pack1;
+
+ class Hi{
+   public void disp(){
+    System.out.println("Hello");
+   }
+}
+
+
+package pack1;
+
+
+
+class Main{
+   public static void main(String args[]){
+   Hi hi=new Hi();
+ }
+}
+
+[The above code will work as both Hi and Main are in the same package though the access modifier of Hi is 
+ default]
+
+---------------------------------------------------------------------------------------------------------
+Q Other than public and default can a class have private and protected specifier?
+A No. 
+
+We cannot write
+
+protected class Hi{
+   public void disp(){
+    System.out.println("Hello");
+   }
+}
+
+We cannot write
+
+private class Hi{
+   public void disp(){
+    System.out.println("Hello");
+   }
+}
+----------------------------------------------------------------------------------------------------------
+
+
 
 import java.util.Scanner;
 public class UserInput {
