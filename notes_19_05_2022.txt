@@ -1154,7 +1154,7 @@ public class Demo12 {
                         }
          }
   }
------------------
+-----------------------------------------------------------------------------------------------
 package exception;
 public class Demo13 {
 
@@ -1236,3 +1236,115 @@ public class UserGeneratedException{
    }
 }
 }
+------------------------------------------------------------------------------------------------------------
+package revise;
+
+// split
+public class Demo1 {
+
+	public static void main(String[] args) {
+		String sent="Hi How Are You?";
+		String array[]=sent.split(" ");
+		System.out.println(array.length); 
+		
+		char ch='1';
+		System.out.println(Character.isDigit(ch));
+		System.out.println(Character.isAlphabetic(ch));
+		char ch2='A';
+		System.out.println(Character.isUpperCase(ch2));
+		
+		boolean isUpperFirstCharacter=true;
+		for(String arr : array)
+		{
+			if(!Character.isUpperCase(arr.charAt(0)))
+					{
+				isUpperFirstCharacter=false;
+				break;
+						
+					}
+		}
+		
+		if(isUpperFirstCharacter==false)
+		{
+			System.out.println("All the words are not starting with uppercase");
+			
+		}
+		else {
+			System.out.println("All the words starts with uppercase");
+		}
+		
+		
+		boolean isMoreThanThree=true; 
+        for(String arr : array)
+        {
+        	if(arr.length()<3)
+        	{
+        		isMoreThanThree=false;
+        		break;
+        	}
+        }
+		
+        if(isMoreThanThree) {
+        	System.out.println("Yes all are 3 or more characters");
+        	
+        	
+        }
+        else
+        {
+        	System.out.println("less than 3");
+        	
+        }
+        
+		
+		
+		
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------
+
+package revise;
+
+public class MobileCheck {
+
+	public static void main(String[] args) {
+		String mobile="123456789a";
+		String pattern="\\d{10}";
+		if(mobile.matches(pattern))
+		{
+			System.out.println("Valid");
+			
+		}
+		else
+		{
+			System.out.println("Invalid");
+		}
+	}
+
+}
+
+/*
+assetId should start with either "DSK" or "LTP" or "IPH" followed by a hyphen (-) and 6 digits and a character which should be either 'H' or 'L' (case-insensitive).
+*/
+public class AssetIdCheck{
+     public static void main(String args[]){
+      String assetId="DSK-123456H";
+      String assetIdPattern="^(DSK|LTP|IPH)-\\d{6}[HLhl]$"; 
+      if(assetId.matches(assetIdPattern)){
+          System.out.println("Valid");
+
+       }
+     else
+       {
+         System.out.println("Invalid");
+       }
+   }
+}
+
+
+
+   String assetId="DSK-123456H";
+   String assetIdPattern="^(DSK|LTP|IPH)-\\d{6}[HLhl]$"
+   
+
+---------------------------------------------------------------------------------------------------------
