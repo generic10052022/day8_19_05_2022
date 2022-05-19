@@ -1,3 +1,17 @@
+
+Q Can we declare an abstract class with no abstract methods?
+A Yes, we can declare an abstract class with no abstract methods in Java.
+
+* An abstract class means that hiding the implementation and showing the function definition to the user.
+* An abstract class having both abstract methods and non-abstract methods.
+* For an abstract class, we are not able to create an object directly. But Indirectly we can create an object using the subclass object.
+* A Java abstract class can have instance methods that implement a default behavior.
+* An abstract class can extend only one class or one abstract class at a time.
+* Declaring a class as abstract with no abstract methods means that we don't allow it to be instantiated on its own.
+* An abstract class used in Java signifies that we can't create an object of the class directly.
+
+--------------------------------------------------------------------------------------------------------------
+
 Interface are providing a set of protocols/rules which the classes need to adhere.
 
 public interface Calculator1 {
